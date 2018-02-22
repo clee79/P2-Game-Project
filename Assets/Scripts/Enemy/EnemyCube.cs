@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class EnemyCube : EnemyBase
 {
-	float raylength = 150f;
-	bool rayhit = false;
+	private float raylength = 150f;
+	private bool rayhit = false;
 
 	void Awake ()
 	{

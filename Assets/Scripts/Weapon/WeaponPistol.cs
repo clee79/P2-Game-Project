@@ -10,15 +10,13 @@ public class WeaponPistol : WeaponBase
 	private int pAmmo2 = 4;   	
 
     public int Ammo { get { return ammo; } set { value = ammo; } }
-    public int PAmmo2 { get { return pAmmo2; } set { value = pAmmo2; } }
-    //public bool IsActive { get { return isActive; } set { value = isActive; } }   
+    public int PAmmo2 { get { return pAmmo2; } set { value = pAmmo2; } }     
 
     void Start()
     {
         this.ammo = 4;
         this.pAmmo2 = 4;
-        this.firerate = 1f;
-        this.isActive = false;
+        this.firerate = 1f;        
     }
 
 

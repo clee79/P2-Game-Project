@@ -5,14 +5,12 @@ using UnityEngine;
 public class WeaponMachineGun : WeaponBase
 {    
 
-    public int Ammo { get { return ammo; } set { value = ammo; } }
-    //public bool IsActive { get { return isActive; } set { value = isActive; } }    
+    public int Ammo { get { return ammo; } set { value = ammo; } }      
 
     void Start ()
     {
-        ammo = 40;
-        firerate = 5f;       
-        this.isActive = false;
+        this.ammo = 40;
+        this.firerate = 5f;        
     }
 
     public override void Shoot(GameObject s, Transform a, Transform q, Transform x)

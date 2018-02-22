@@ -9,12 +9,10 @@ public class WeaponFlameThrower : WeaponBase
 	void Start ()
     {
         this.ammo = 1000;
-        this.firerate = 2.0f;       
-        this.isActive = false;
+        this.firerate = 2.0f;        
     }
 
-    public int Ammo { get { return ammo; } set { value = ammo; } }
-    //public bool IsActive { get { return isActive; } set { value = isActive; } }
+    public int Ammo { get { return ammo; } set { value = ammo; } }    
    
     public override void Shoot(GameObject s, Transform a, Transform q, Transform x)
     {

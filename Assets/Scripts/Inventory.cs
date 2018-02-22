@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     {
 
     public List <WeaponBase> weapon;
-    PlayerController player;    
+    PlayerController player;
 
 	public  Inventory()
     {
@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour
         weapon.Add(t);
         t.gameObject.SetActive(false);
         t.isActive = false;        
-    }    
+    }
 
     public void ActiveWeapon(WeaponBase w)
     {
@@ -59,13 +59,16 @@ public class Inventory : MonoBehaviour
 
     public void PrintInventory()
     {
-        string s = " Weapon ";
+        int count = 1;
+        string s = (" Weapon # " + count + " ");
         foreach (WeaponBase i in weapon)
         {
             s += i;
+            count++;
+            Debug.Log(s);
+            s = (" Weapon # " + count + " ");
         }
-
-        Debug.Log(s);
+        
     }
 
 }

@@ -11,7 +11,7 @@ public abstract class WeaponBase : MonoBehaviour
     public BulletController bullet;
 	protected int ammo = 6;
 	protected float firerate = 1.25f;
-    public bool isActive;   
+    public bool isActive;
 
     public WeaponBase()
     {
