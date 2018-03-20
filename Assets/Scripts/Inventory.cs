@@ -18,27 +18,31 @@ public class Inventory : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
-    public void SpawnWeapons()
-    {
-        // Spawn weapons in to random positions in the world.
-        foreach (WeaponBase i in weapon)
-        {
-            i.transform.position = new Vector3(Random.Range(-weaponSpawn.x, weaponSpawn.x), weaponSpawn.y, Random.Range(-weaponSpawn.z, weaponSpawn.z));
-        }
-    }
+    //public void SpawnWeapons()
+    //{
+    //    Spawn weapons in to random positions in the world.
+    //    foreach (WeaponBase i in weapon)
+    //    {
+    //        i.transform.position = new Vector3(Random.Range(-weaponSpawn.x, weaponSpawn.x), weaponSpawn.y, Random.Range(-weaponSpawn.z, weaponSpawn.z));
+    //    }
+    //}
 
     public void AddToInventory(WeaponBase t)
     {
         weapon.Add(t);
         t.gameObject.SetActive(false);
-        t.isActive = false;        
+        t.isActive = false;
+        t.isPickedup = true;
     }
 
     public void ActiveWeapon(WeaponBase w)
     {
-        // Turns on gun for selected object.
-        w.gameObject.SetActive(true);
-        w.isActive = true;        
+        if (w.isPickedup == true)
+        {
+            // Turns on gun for selected object.
+            w.gameObject.SetActive(true);
+            w.isActive = true;
+        }            
 
         // Disable unselected guns.
         if (w.gameObject.tag == player.currentWeapon)

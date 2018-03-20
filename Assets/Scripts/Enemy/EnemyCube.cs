@@ -20,8 +20,8 @@ public class EnemyCube : EnemyBase
 	void Update () 
 	{
         // remove these after debugging.
-        Move(player.transform.position);
-        Attack(player.transform.position);
+        //Move(player.transform.position);
+        //Attack(player.transform.position);
 	}
 
 	public override void Move (Vector3 playerPosition)

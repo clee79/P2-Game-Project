@@ -12,6 +12,7 @@ public abstract class WeaponBase : MonoBehaviour
 	protected int ammo = 6;
 	protected float firerate = 1.25f;
     public bool isActive;
+    public bool isPickedup;
 
     public WeaponBase()
     {

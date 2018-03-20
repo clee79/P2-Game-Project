@@ -31,23 +31,41 @@ public class PlayerController : MonoBehaviour
         flamer = GameObject.FindGameObjectWithTag("Flamethrower").GetComponent<WeaponFlameThrower>();
         inventory = new Inventory();
         currentWeapon = null;
-        
-        inventory.AddToInventory(pistol);
-        inventory.AddToInventory(mgun);
-        inventory.AddToInventory(flamer);
-        inventory.SpawnWeapons();
-        inventory.PrintInventory();              
+
+        pistol.gameObject.SetActive(false);
+        mgun.gameObject.SetActive(false);
+        flamer.gameObject.SetActive(false);
         
     }
-	
 
-	void Update () 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Pistol")
+        {
+            inventory.AddToInventory(pistol);
+            Destroy(other.gameObject);
+            inventory.PrintInventory();
+        }
+        if (other.tag == "MG")
+        {
+            inventory.AddToInventory(mgun);
+            Destroy(other.gameObject);
+            inventory.PrintInventory();
+        }
+        if (other.tag == "Flamethrower")
+        {
+            inventory.AddToInventory(flamer);
+            Destroy(other.gameObject);
+            inventory.PrintInventory();
+        }
+    }
+    void Update () 
 	{
         // Set up keycommands for selecting weapon
         // 1 for pistol, 2 for machinegun, 3 for flamethrower.
         // Sets Pistol texture and shoot command to active.
         if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
+        {            
             currentWeapon = "Pistol";
             inventory.ActiveWeapon(pistol);            
             

@@ -295,6 +295,7 @@
     <Compile Include="Assets\Scripts\Weapon\WeaponFlameThrower.cs" />
     <Compile Include="Assets\Scripts\Weapon\WeaponMachineGun.cs" />
     <Compile Include="Assets\Scripts\Weapon\WeaponPistol.cs" />
+    <Compile Include="Assets\Scripts\WeaponPickUp.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

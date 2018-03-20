@@ -16,7 +16,7 @@ public class WeaponPistol : WeaponBase
     {
         this.ammo = 4;
         this.pAmmo2 = 4;
-        this.firerate = 1f;        
+        this.firerate = 1f;       
     }
 
 
