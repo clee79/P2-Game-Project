@@ -10,11 +10,21 @@ public class Inventory : MonoBehaviour
 
     public List <WeaponBase> weapon;
     PlayerController player;
+    public Vector3 weaponSpawn;
 
 	public  Inventory()
     {
         weapon = new List<WeaponBase>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
+
+    public void SpawnWeapons()
+    {
+        // Spawn weapons in to random positions in the world.
+        foreach (WeaponBase i in weapon)
+        {
+            i.transform.position = new Vector3(Random.Range(-weaponSpawn.x, weaponSpawn.x), weaponSpawn.y, Random.Range(-weaponSpawn.z, weaponSpawn.z));
+        }
     }
 
     public void AddToInventory(WeaponBase t)

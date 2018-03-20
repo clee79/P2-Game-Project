@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
     {        
         enemy = new List<EnemyBase>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        //Spawn();
+        Spawn();
 	}
 	
 	

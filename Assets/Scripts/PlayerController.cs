@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	public Transform shotSpawn1, shotSpawn2, MGSpawn, FTSpawn, FTSpawn2, FTSpawm3;
     public GameObject shot;
     Inventory inventory;
+    public List<WeaponBase> weapon;
     
 	
 	void Start () 
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
         inventory.AddToInventory(pistol);
         inventory.AddToInventory(mgun);
         inventory.AddToInventory(flamer);
+        inventory.SpawnWeapons();
         inventory.PrintInventory();              
         
     }
@@ -105,5 +107,5 @@ public class PlayerController : MonoBehaviour
 				rb.isKinematic = false;
 			}
 		}		
-	}   
+	}
 }
