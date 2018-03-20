@@ -1,35 +1,33 @@
 ﻿// Chris Lee
-// Game Project 1
+// Game Project
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EnemyBoss : EnemyBase
 {
-	UnityEngine.AI.NavMeshAgent nav;
-	void Awake ()
-	{
-		
-		nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
-	}
+    UnityEngine.AI.NavMeshAgent agent;
+    public Transform bossShot;
 
-	void Update () 
-	{
-		Move();
-	}
+    void Start()
+    {
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+    }
 
-	public override void Move()
-	{		
-		// Enable mesh if false to start movement
-		// Use Navmesh to set the destination as the players position.
-		nav.enabled = true;
-		nav.SetDestination(player.transform.position);
+    public override void Move(Vector3 playerPosition)
+    {          
+        agent.SetDestination(playerPosition);
+    }
 
-		// If close enough, disable navmesh movement
-		if ( Vector3.Distance(transform.position, player.transform.position) <= 8)
-		{
-			nav.enabled = false;
-		}
-	}
+    public override void Attack(Vector3 playerPosition)
+    {
+        bossShot = GameObject.FindGameObjectWithTag("BSpawn").GetComponent<Transform>();
+        float check = Vector3.Distance(transform.position, playerPosition);
+        if (check <= 20)
+        {            
+            Instantiate(enemyshot, bossShot, bossShot);
+        }
+    }
 }

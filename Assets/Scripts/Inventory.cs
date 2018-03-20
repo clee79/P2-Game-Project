@@ -1,5 +1,5 @@
 ﻿// Chris Lee
-// Game Project 1
+// Game Project
 
 using System.Collections;
 using System.Collections.Generic;

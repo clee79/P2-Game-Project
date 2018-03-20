@@ -9,7 +9,7 @@ public class BulletController : MonoBehaviour
 {
 	private float speed = 25f;
 	public float factor = 1;
-    public float time = 5f;
+    public float time = 5f;    
 
 	void Start ()
 	{
@@ -35,10 +35,12 @@ public class BulletController : MonoBehaviour
 	// Bullet destruction on hit.
 	void OnTriggerEnter (Collider other)
 	{
-		if (other.gameObject.tag == "Cube")
-		{	
-			other.gameObject.SetActive(false);
-			Destroy(gameObject);
+		if (other.gameObject.tag == "Cube" || other.gameObject.tag == "BigBox" || other.gameObject.tag == "Boss")
+		{
+            //other.gameObject.SetActive(false);
+
+            // Look into removing items from list so Collection error goes away.            
+			Destroy(other.gameObject);
 		}
 	}
 }
