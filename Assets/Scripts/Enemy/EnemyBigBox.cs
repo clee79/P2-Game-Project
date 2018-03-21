@@ -26,16 +26,20 @@ public class EnemyBigBox : EnemyBase
 
     public override void Attack(Vector3 playerPosition)
     {
-        time += Time.deltaTime;
-        if (time > tdelay)
+        if (player != null)
         {
-            // *TODO* Look into adding spinning animation for box attack..
-            tdelay = time + 3f;
-            float check = Vector3.Distance(transform.position, playerPosition);
-            if (check <= 5)
+            time += Time.deltaTime;
+            if (time > tdelay)
             {
-                player.PlayerHealth -= 25;
+                // *TODO* Look into adding spinning animation for box attack..
+                tdelay = time + 3f;
+                float check = Vector3.Distance(transform.position, playerPosition);
+                if (check <= 8)
+                {
+                    player.PlayerHealth -= 20;
+                }
             }
         }
+        
     }
 }

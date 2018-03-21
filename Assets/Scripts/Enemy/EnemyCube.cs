@@ -47,20 +47,22 @@ public class EnemyCube : EnemyBase
 
     public override void Attack(Vector3 playerPosition)
     {
-        // Get time, check for time between shots, fire shot if time delay passed.
-        // TODO - Issue currently with angle of shot spawn. The shots spawn properly from the assigned transform
-        // but fly from that location to along the Z axis only. 
-        time += Time.deltaTime;
+        
+        if (player != null)
+        {            
+            time += Time.deltaTime;
 
-        if (time > timeDelay)
-        {
-            timeDelay = time + 8.00f;
-            float check = Vector3.Distance(transform.position, playerPosition);
-            Quaternion qcheck = Quaternion.identity;
-            if (check <= 20)
+            if (time > timeDelay)
             {
-                Instantiate(enemyshot, headshot.transform.position, qcheck);
+                // Check distance, update fire delay, fire shot if in range.                
+                float check = Vector3.Distance(transform.position, playerPosition);
+                if (check <= 20)
+                {
+                    timeDelay = time + 8.00f;
+                    Instantiate(enemyshot, headshot.transform.position, transform.rotation);
+                }
             }
         }
+        
     }
 }

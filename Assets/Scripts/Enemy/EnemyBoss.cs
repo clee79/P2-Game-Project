@@ -12,11 +12,13 @@ public class EnemyBoss : EnemyBase
     public Transform bossShot;
     private float timeDelay = 0;
     private float time;
+    private PlayerController playerRef;
     
 
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        playerRef = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     public override void Move(Vector3 playerPosition)
@@ -29,20 +31,24 @@ public class EnemyBoss : EnemyBase
 
     public override void Attack(Vector3 playerPosition)
     {
-        // Get time
-        time += Time.deltaTime;
         
-        // Compare delay for repeat shots
-        if (time > timeDelay)
+        if (playerRef != null)
         {
-            // Update delay, check distance, fire shot if in range.
-            timeDelay = time + 5.00f;
-            float check = Vector3.Distance(transform.position, playerPosition);
-            Quaternion qcheck = Quaternion.identity;
-            if (check <= 25)
+            // Get time
+            time += Time.deltaTime;
+
+            // Compare delay for repeat shots
+            if (time > timeDelay)
             {
-                Instantiate(enemyshot, bossShot.transform.position, qcheck);
+                // Check distance, update fire delay, fire shot if in range.                
+                float check = Vector3.Distance(transform.position, playerPosition);
+                if (check <= 40)
+                {
+                    timeDelay = time + 5.00f;
+                    Instantiate(enemyshot, bossShot.position, transform.rotation);
+                }
             }
         }
+       
     }
 }

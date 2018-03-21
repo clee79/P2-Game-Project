@@ -23,7 +23,7 @@ public abstract class EnemyBase : MonoBehaviour
 	
 	}
 
-	// Base Enemy Move Command
+	// Base Enemy Move/Attack Commands
 	public abstract void Move (Vector3 playerPosition);
     public abstract void Attack(Vector3 playerPosition);
 

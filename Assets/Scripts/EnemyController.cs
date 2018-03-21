@@ -43,7 +43,13 @@ public class EnemyController : MonoBehaviour
         {
             // Pick an enemy type then assign a random range.
             int select = Random.Range(0, 3);
-            Vector3 spawnlocation = new Vector3(Random.Range(-spawn.x, spawn.y), spawn.y, Random.Range(-spawn.z, spawn.z));
+            Vector3 spawnlocation = new Vector3(Random.Range(-spawn.x, spawn.x), spawn.y, Random.Range(-spawn.z, spawn.z));
+
+            // if the random location is to close the player, while loop defines new spawn
+            while (Vector3.Distance(spawnlocation,player.transform.position) <= 30 )
+            {
+                spawnlocation = new Vector3(Random.Range(-spawn.x, spawn.x)+2, spawn.y, Random.Range(-spawn.z, spawn.z)+2);
+            }
             Quaternion spawnquaterion = Quaternion.identity;
 
             // Based on random selection, spawn enemy type and add to list of enemy.

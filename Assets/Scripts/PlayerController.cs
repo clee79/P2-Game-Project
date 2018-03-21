@@ -107,8 +107,9 @@ public class PlayerController : MonoBehaviour
         if (playerHealth <= 0 )
         {
             pAlive = false;
+            this.gameObject.SetActive(false);
         }
-	}
+	}    
 
 	void FixedUpdate()
 	{

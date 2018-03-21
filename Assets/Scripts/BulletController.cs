@@ -13,8 +13,7 @@ public class BulletController : MonoBehaviour
     PlayerController player;
 
 	void Start ()
-	{
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+	{   
         GetComponent<Rigidbody>().velocity = transform.forward * speed * factor;        
 		BulletTravel(Time);
 	}
@@ -43,7 +42,14 @@ public class BulletController : MonoBehaviour
 		}
         if (other.gameObject.tag == "Player")
         {
-            player.PlayerHealth -= 10;
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+            if (player != null)
+            {
+                player.PlayerHealth -= 10;
+            }
+            
+            Destroy(this.gameObject);
         }
 	}
 }

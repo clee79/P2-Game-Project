@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory
     {
 
     public List <WeaponBase> weapon;
@@ -17,15 +17,6 @@ public class Inventory : MonoBehaviour
         weapon = new List<WeaponBase>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
-
-    //public void SpawnWeapons()
-    //{
-    //    Spawn weapons in to random positions in the world.
-    //    foreach (WeaponBase i in weapon)
-    //    {
-    //        i.transform.position = new Vector3(Random.Range(-weaponSpawn.x, weaponSpawn.x), weaponSpawn.y, Random.Range(-weaponSpawn.z, weaponSpawn.z));
-    //    }
-    //}
 
     public void AddToInventory(WeaponBase t)
     {
@@ -42,7 +33,7 @@ public class Inventory : MonoBehaviour
             // Turns on gun for selected object.
             w.gameObject.SetActive(true);
             w.isActive = true;
-        }            
+        }
 
         // Disable unselected guns.
         if (w.gameObject.tag == player.currentWeapon)
@@ -63,13 +54,11 @@ public class Inventory : MonoBehaviour
                     if (i.gameObject.activeSelf == true)
                     {
                         i.gameObject.SetActive(false);
-                    }                 
-                    
-                }
-                    
+                    }
+                }                    
             }
-        }
-    }      
+        }      
+    }
 
     public void PrintInventory()
     {
@@ -82,7 +71,5 @@ public class Inventory : MonoBehaviour
             Debug.Log(s);
             s = (" Weapon # " + count + " ");
         }
-        
     }
-
 }
