@@ -8,21 +8,10 @@ using UnityEngine;
 public class EnemyCube : EnemyBase
 {
 	private float raylength = 150f;
-	private bool rayhit = false;
-    private float attackrange = 5f;
+	private bool rayhit = false;   
     public Transform headshot;
-
-	void Awake ()
-	{
-        headshot = GameObject.FindGameObjectWithTag("HSpawn").GetComponent<Transform>();
-	}
-	
-	void Update () 
-	{
-        // remove these after debugging.
-        //Move(player.transform.position);
-        //Attack(player.transform.position);
-	}
+    private float time;
+    private float timeDelay = 0f;	
 
 	public override void Move (Vector3 playerPosition)
 	{        
@@ -58,18 +47,20 @@ public class EnemyCube : EnemyBase
 
     public override void Attack(Vector3 playerPosition)
     {
-        // Cast a ray to check if in attack range
-        // if (Physics.Raycast(transform.position, transform.forward, attackrange) == true )  
+        // Get time, check for time between shots, fire shot if time delay passed.
+        // TODO - Issue currently with angle of shot spawn. The shots spawn properly from the assigned transform
+        // but fly from that location to along the Z axis only. 
+        time += Time.deltaTime;
 
-        // Headshot is not spawnning in the correct location.
-        // Even though the position is held by the parent it is not properlly updating to the game.
-        // All shot are fired from 0,0,0.
-            headshot = GetComponentInChildren<Transform>();
+        if (time > timeDelay)
+        {
+            timeDelay = time + 8.00f;
             float check = Vector3.Distance(transform.position, playerPosition);
+            Quaternion qcheck = Quaternion.identity;
             if (check <= 20)
-            {            
-                Instantiate(enemyshot, headshot, headshot);
+            {
+                Instantiate(enemyshot, headshot.transform.position, qcheck);
             }
-        
+        }
     }
 }

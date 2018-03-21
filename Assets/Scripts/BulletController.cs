@@ -9,11 +9,13 @@ public class BulletController : MonoBehaviour
 {
 	private float speed = 25f;
 	public float factor = 1;
-    public float time = 5f;    
+    public float time = 5f;
+    PlayerController player;
 
 	void Start ()
 	{
-		GetComponent<Rigidbody>().velocity = transform.forward * speed * factor;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        GetComponent<Rigidbody>().velocity = transform.forward * speed * factor;        
 		BulletTravel(Time);
 	}
 
@@ -36,11 +38,12 @@ public class BulletController : MonoBehaviour
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.gameObject.tag == "Cube" || other.gameObject.tag == "BigBox" || other.gameObject.tag == "Boss")
-		{
-            //other.gameObject.SetActive(false);
-
-            // Look into removing items from list so Collection error goes away.            
+		{                       
 			Destroy(other.gameObject);
 		}
+        if (other.gameObject.tag == "Player")
+        {
+            player.PlayerHealth -= 10;
+        }
 	}
 }

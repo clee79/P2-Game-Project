@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
         weapon.Add(t);
         t.gameObject.SetActive(false);
         t.isActive = false;
-        t.isPickedup = true;
+        t.isPickedup = true;        
     }
 
     public void ActiveWeapon(WeaponBase w)

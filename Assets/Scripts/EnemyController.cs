@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     public PlayerController player;
     public Vector3 spawn;
     public EnemyBase[] enemies;
+    public int spawncount;
 
 
     void Start ()
@@ -29,19 +30,23 @@ public class EnemyController : MonoBehaviour
         {
             if (i != null)
             {
-                //i.Move(currentPos);
-                //i.Attack(currentPos);
+                i.Move(currentPos);
+                i.Attack(currentPos);
             }
         }
     }
 
     public void Spawn()
     {
-        while (enemy.Count <= 8)
-        {            
+        // Spawn enemies until spawncount met.
+        while (enemy.Count <= spawncount)
+        {
+            // Pick an enemy type then assign a random range.
             int select = Random.Range(0, 3);
             Vector3 spawnlocation = new Vector3(Random.Range(-spawn.x, spawn.y), spawn.y, Random.Range(-spawn.z, spawn.z));
             Quaternion spawnquaterion = Quaternion.identity;
+
+            // Based on random selection, spawn enemy type and add to list of enemy.
             if (select == 0)
             {
                 enemy.Add((EnemyCube)Instantiate(enemies[0], spawnlocation, spawnquaterion));                

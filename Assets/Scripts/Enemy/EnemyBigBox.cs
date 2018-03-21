@@ -7,10 +7,8 @@ using UnityEngine;
 
 public class EnemyBigBox : EnemyBase 
 {
-	void Update () 
-	{
-        //Move(player.transform.position);
-    }
+	private float time;
+    private float tdelay;
 
 	public override void Move (Vector3 playerPosition)
 	{
@@ -22,13 +20,22 @@ public class EnemyBigBox : EnemyBase
 		if ( Vector3.Distance(transform.position, playerPosition) >= 8 )
 		{
 			transform.position = Vector3.MoveTowards(transform.position, playerPosition, sd);
-
 		}
 
 	}
 
     public override void Attack(Vector3 playerPosition)
     {
-        
+        time += Time.deltaTime;
+        if (time > tdelay)
+        {
+            // *TODO* Look into adding spinning animation for box attack..
+            tdelay = time + 3f;
+            float check = Vector3.Distance(transform.position, playerPosition);
+            if (check <= 5)
+            {
+                player.PlayerHealth -= 25;
+            }
+        }
     }
 }

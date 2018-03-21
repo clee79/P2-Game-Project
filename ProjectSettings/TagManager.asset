@@ -14,6 +14,7 @@ TagManager:
   - Boss
   - BSpawn
   - HSpawn
+  - EBullet
   layers:
   - Default
   - TransparentFX

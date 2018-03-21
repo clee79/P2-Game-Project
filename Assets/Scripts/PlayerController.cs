@@ -18,11 +18,18 @@ public class PlayerController : MonoBehaviour
     public GameObject shot;
     Inventory inventory;
     public List<WeaponBase> weapon;
+    public int playerHealth;
+    private bool pAlive;
+
+    public int PlayerHealth { get { return playerHealth; } set { playerHealth = value; } }
     
 	
 	void Start () 
 	{
+        pAlive = true;
 		rb = GetComponent<Rigidbody>();
+        playerHealth = 100;
+
         // Makes a temp game object for setting up pistol
         // Assigns the temp to pistol.
         GameObject temp = GameObject.FindGameObjectWithTag("Pistol");
@@ -32,14 +39,16 @@ public class PlayerController : MonoBehaviour
         inventory = new Inventory();
         currentWeapon = null;
 
+        // Disable mounts until weapons are picked up.
         pistol.gameObject.SetActive(false);
         mgun.gameObject.SetActive(false);
         flamer.gameObject.SetActive(false);
         
-    }
+    }    
 
     void OnTriggerEnter(Collider other)
     {
+        // When the player hits the weapon with this tag, collect to inventory, destroy, and notify console.
         if (other.tag == "Pistol")
         {
             inventory.AddToInventory(pistol);
@@ -58,6 +67,7 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             inventory.PrintInventory();
         }
+        
     }
     void Update () 
 	{
@@ -93,37 +103,46 @@ public class PlayerController : MonoBehaviour
             // Shoots flamethrower
             flamer.Shoot(shot, FTSpawn, FTSpawn2, FTSpawm3);
         }
+
+        if (playerHealth <= 0 )
+        {
+            pAlive = false;
+        }
 	}
 
 	void FixedUpdate()
 	{
-		// Player move code 
-		// Credit to Gesick lecture
-		float h = Input.GetAxis("Horizontal");
-		float v = Input.GetAxis("Vertical");
-		rotateY += h * 5;
-		if (rotateY > 360 || rotateY < -360)
-			{
-				rotateY = 0;
-			}
-		transform.rotation = Quaternion.Euler(0, rotateY, 0);
+        if (pAlive != false)
+        {
+            // Player move code 
+            // Credit to Gesick lecture
+            float h = Input.GetAxis("Horizontal");
+            float v = Input.GetAxis("Vertical");
+            rotateY += h * 5;
+            if (rotateY > 360 || rotateY < -360)
+            {
+                rotateY = 0;
+            }
+            transform.rotation = Quaternion.Euler(0, rotateY, 0);
 
-		if (v != 0)
-		{
-			rb.isKinematic = true;
-			Vector3 velocity = transform.forward * speed * Time.deltaTime * v;
-			transform.position += velocity;
+            if (v != 0)
+            {
+                rb.isKinematic = true;
+                Vector3 velocity = transform.forward * speed * Time.deltaTime * v;
+                transform.position += velocity;
 
-            // Speed boost
-			if (Input.GetKey(KeyCode.LeftShift))
-			{
-				transform.position += velocity * 1.25f;
-			}
+                // Speed boost
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    transform.position += velocity * 1.25f;
+                }
 
-			if ( v == 0)
-			{
-				rb.isKinematic = false;
-			}
+                if (v == 0)
+                {
+                    rb.isKinematic = false;
+                }
+            }
+		
 		}		
 	}
 }
